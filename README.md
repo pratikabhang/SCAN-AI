@@ -1,263 +1,190 @@
-# 💻 SYNCCODE — Instant Coding Room
+# 🤖 SCAN-AI — Real-Time AI Object Detection
 
-> A collaborative coding workspace designed to bring developers together for shared coding, learning, and problem-solving.
+> Detect and visualize objects in a live camera feed directly in your browser using machine learning and JavaScript.
 
-![Project](https://img.shields.io/badge/Project-SyncCode-blue)
-![Architecture](https://img.shields.io/badge/Architecture-Client%20%2B%20Server-purple)
-![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Development-orange)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![ml5.js](https://img.shields.io/badge/ML5.js-Machine%20Learning-blue)
 ![License](https://img.shields.io/badge/License-Not%20Specified-lightgrey)
 
 ## 📖 Overview
 
-**SYNCCODE — Instant Coding Room** is a collaborative coding project organized into separate client and server applications. Its repository includes the frontend, backend, and a Docker Compose configuration for running both components together.
+**SCAN-AI** is a browser-based object detection project built with HTML, CSS, and JavaScript. It uses **ml5.js** and the COCO-SSD object detection model to identify objects in a live video stream.
 
-The project provides a foundation for building an online coding room where developers can work together in a shared development environment.
+The application provides a camera-based interface with an AI toggle and a frames-per-second (FPS) control, allowing users to explore real-time object detection through a simple web interface.
 
-By separating the client and server, the application maintains a modular structure that supports independent development, testing, and deployment of its components.
+No dedicated backend server is required by the current project structure.
 
-🔗 **Repository:** [SYNCCODE-INSTANT-CODING-ROOM](https://github.com/pratikabhang/SYNCCODE-INSTANT-CODING-ROOM)
+🔗 **GitHub Repository:** [pratikabhang/SCAN-AI](https://github.com/pratikabhang/SCAN-AI)
 
 ## ✨ Features
 
-- **Separate Client and Server:** Organizes the application into independently maintained frontend and backend components.
-- **Docker Compose Integration:** Defines a multi-container development environment.
-- **Modular Architecture:** Keeps client-side and server-side code in separate directories.
-- **Dedicated Development Ports:** Exposes the client on port `5173` and the server on port `3000` through the provided Compose configuration.
-- **Containerized Development:** Uses Dockerfiles in the client and server directories to build container images.
-- **Extensible Foundation:** Provides a structure for developing and extending collaborative coding functionality.
-
-Specific capabilities such as real-time synchronization, room creation, chat, authentication, and code execution should be documented only after confirming their implementation in the source code.
+- **Real-Time Object Detection:** Uses the COCO-SSD model through ml5.js to detect supported objects in a video stream.
+- **Browser-Based Camera Input:** Uses the browser's video capabilities for live input.
+- **Detection Visualization:** Provides a canvas for displaying detection results.
+- **AI Toggle:** Includes a control for enabling or disabling AI detection.
+- **FPS Control:** Offers a slider to adjust the target detection frame rate.
+- **Lightweight Frontend:** Uses standard HTML, CSS, and JavaScript without a dedicated backend.
+- **Simple Interface:** Uses Materialize CSS for interface styling.
 
 ## 🛠️ Tech Stack
 
 | Technology | Purpose |
 |---|---|
-| Client application | Frontend interface |
-| Server application | Backend functionality |
-| Docker | Containerization |
-| Docker Compose | Multi-container application orchestration |
-| Git and GitHub | Version control and source hosting |
+| HTML5 | Defines the application structure and video element |
+| CSS3 | Styles the interface and video display |
+| JavaScript | Controls the video feed and detection workflow |
+| [ml5.js](https://ml5js.org/) | Provides a browser-friendly machine learning interface |
+| COCO-SSD | Performs object detection on video frames |
+| [Materialize CSS](https://materializecss.com/) | Provides interface styling and UI components |
+| HTML Canvas | Displays the video detection output |
 
-The exact programming languages, frontend framework, backend framework, and external dependencies should be confirmed from the source files and package manifests.
-
-## 🏗️ Architecture
-
-The application uses a client-server architecture with separate containers.
+## 🏗️ How It Works
 
 ```text
-                 Developer
-                     |
-                     v
-                Web Browser
-                     |
-                     v
-              Client Application
-                 Port 5173
-                     |
-                     v
-              Server Application
-                 Port 3000
-                     |
-                     v
-             Application Services
+          Browser
+             |
+             v
+       Camera / Video
+             |
+             v
+       Video Processing
+             |
+             v
+      ml5.js ObjectDetector
+             |
+             v
+        COCO-SSD Model
+             |
+             v
+      Detection Results
+             |
+             v
+      Canvas Visualization
 ```
 
-Docker Compose coordinates the client and server containers and connects them through a shared Docker bridge network.
+1. The browser loads the HTML page and required JavaScript libraries.
+2. The application initializes the ml5.js object detector.
+3. The COCO-SSD model loads.
+4. The video processing script accesses the video stream.
+5. The detector processes video frames and returns object predictions.
+6. The application visualizes detection results on the canvas.
 
-### Main Components
-
-| Component | Responsibility |
-|---|---|
-| `client/` | Frontend application |
-| `server/` | Backend application |
-| `client/Dockerfile` | Defines the client container build |
-| `server/Dockerfile` | Defines the server container build |
-| `docker-compose.yml` | Configures services, ports, volumes, and networking |
-| `.gitignore` | Specifies files Git should ignore |
-| `.github/ISSUE_TEMPLATE/` | Provides templates for repository issues |
-| `.vscode/` | Contains editor-related project configuration |
-
-## 🎯 Objectives
-
-- Organize the application into distinct client and server components.
-- Simplify local development with Docker Compose.
-- Provide a maintainable foundation for collaborative coding functionality.
-- Make the application easier to build, test, and extend.
-- Support future improvements to the coding-room experience.
+Camera access requires user permission and may require HTTPS or a supported local development environment.
 
 ## 📂 Project Structure
 
 ```text
-SYNCCODE-INSTANT-CODING-ROOM/
-├── .github/
-│   └── ISSUE_TEMPLATE/
-├── .vscode/
-├── client/
-│   └── Dockerfile
-├── server/
-│   └── Dockerfile
-├── docker-compose.yml
-├── .gitignore
-├── .gitattributes
-└── preview.png
+SCAN-AI/
+├── index.html    # Main application interface and model initialization
+├── style.css     # Page layout and styling
+├── video.js      # Video handling and object detection logic
+├── .gitignore    # Git ignore rules
+└── .gitattributes
 ```
-
-The client and server directories contain their respective application source files and supporting configuration.
 
 ## 💻 Prerequisites
 
-Before running the project, install:
+- A modern web browser, such as Chrome, Firefox, or Edge.
+- An available camera if using live video input.
+- An internet connection to load the externally hosted ml5.js and Materialize libraries.
+- A local HTTP server for reliable browser camera access.
 
-- [Git](https://git-scm.com/)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) or Docker Engine
-- Docker Compose, included with current Docker Desktop installations
-
-If you intend to run the client and server outside Docker, you may also need Node.js and npm. Confirm the required versions from the project's package manifests.
+No Python, Node.js, database, or backend framework is required for the basic static application.
 
 ## 🚀 Installation and Setup
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/pratikabhang/SYNCCODE-INSTANT-CODING-ROOM.git
-cd SYNCCODE-INSTANT-CODING-ROOM
+git clone https://github.com/pratikabhang/SCAN-AI.git
+cd SCAN-AI
 ```
 
-### 2. Review Configuration
+### 2. Run a Local HTTP Server
 
-Inspect the following files before starting the application:
-
-- `docker-compose.yml`
-- `client/Dockerfile`
-- `server/Dockerfile`
-
-Check whether the application requires environment variables, API credentials, or additional services. Configure them according to the actual application requirements.
-
-### 3. Build and Start the Containers
-
-From the repository root, run:
+If Python is installed, run:
 
 ```bash
-docker compose up --build
+python -m http.server 8000
 ```
 
-Docker Compose builds the client and server images and starts the configured services.
-
-### 4. Open the Application
-
-Once the client starts successfully, open:
-
-**Client:** [http://localhost:5173](http://localhost:5173)
-
-The server is exposed on:
-
-**Server:** [http://localhost:3000](http://localhost:3000)
-
-The server's exact routes and API endpoints depend on the implementation.
-
-### 5. Stop the Application
-
-To stop the containers, press `Ctrl+C` in the terminal and run:
+Alternatively, use:
 
 ```bash
-docker compose down
+python3 -m http.server 8000
 ```
 
-### 6. View Container Logs
+### 3. Open the Application
 
-To inspect application output:
+Navigate to:
 
-```bash
-docker compose logs
-```
+[http://localhost:8000](http://localhost:8000)
 
-To follow logs continuously:
+The browser should load `index.html`.
 
-```bash
-docker compose logs -f
-```
+### 4. Allow Camera Access
+
+If prompted, grant camera permission. Wait for the object detection model to finish loading before interacting with the detection controls.
+
+If the camera does not start, check browser permissions and the developer console for errors.
 
 ## ▶️ Usage
 
-1. Start the client and server using Docker Compose.
-2. Open the client URL in your browser.
-3. Interact with the functionality implemented in the application.
-4. Review the server logs if a request fails.
-5. Stop the containers when finished.
+1. Open the application in your browser.
+2. Allow camera access when requested.
+3. Wait for the COCO-SSD model to load.
+4. Use the AI control to enable or disable detection.
+5. Adjust the FPS slider to change the target processing rate.
+6. Observe the video and canvas output as the detector identifies supported objects.
 
-The exact user workflow, including any room-creation or collaboration steps, should follow the controls and instructions implemented in the current application.
+Actual detection performance depends on the device, browser, camera input, and model initialization time.
 
-## 🧰 Development Workflow
+## ⚙️ Dependencies
 
-### Rebuild After Configuration Changes
+The current HTML file references external libraries:
 
-```bash
-docker compose up --build
-```
+- **ml5.js 0.12.2:** Loaded from the unpkg CDN.
+- **Materialize CSS 1.0.0:** Loaded from cdnjs.
 
-### Check Running Containers
+Because these dependencies are loaded externally, an internet connection is needed unless the libraries are downloaded and configured locally.
 
-```bash
-docker compose ps
-```
+For better long-term reliability, consider pinning and reviewing dependency versions before deployment.
 
-### Inspect Client Logs
+## 🔐 Privacy and Security
 
-```bash
-docker compose logs -f client
-```
-
-### Inspect Server Logs
-
-```bash
-docker compose logs -f server
-```
-
-### Shut Down the Environment
-
-```bash
-docker compose down
-```
-
-## 🔐 Security Considerations
-
-Before deploying the application publicly:
-
-- Keep API keys, passwords, and other secrets out of source control.
-- Configure environment variables securely.
-- Validate and sanitize untrusted user input.
-- Apply authentication and authorization where protected operations require them.
-- Restrict access to backend endpoints as appropriate.
-- Use HTTPS for public deployments.
-- Review Docker configuration and dependencies before production use.
+- Camera access is subject to browser permissions.
+- Avoid using camera feeds containing sensitive information.
+- Review external library dependencies before using the application in a sensitive environment.
+- Serve the application over HTTPS when deploying it publicly.
+- Do not assume that all browser-side processing guarantees privacy; verify the behavior of any additional libraries or services you introduce.
 
 ## 🔮 Future Enhancements
 
-Potential enhancements for an instant coding-room application include:
+Potential improvements include:
 
-- Real-time collaborative code editing.
-- Shareable coding rooms and session links.
-- Syntax highlighting and multi-language support.
-- Integrated chat for participants.
-- Code execution with appropriate sandboxing.
-- User authentication and room access controls.
-- Responsive interface improvements.
-- Automated tests and continuous integration.
-- Detailed API and deployment documentation.
+- Add explicit object labels and confidence scores to detection overlays.
+- Improve camera selection and error handling.
+- Add a responsive interface for mobile devices.
+- Provide clearer model-loading and camera-status messages.
+- Optimize detection scheduling and FPS handling.
+- Add support for image uploads in addition to live video.
+- Add automated tests for the video and detection workflow.
+- Bundle dependencies locally for offline use.
 
-These are possible future directions, not assertions that the features already exist.
+These are proposed enhancements, not claims about existing functionality.
 
 ## 🤝 Contributing
 
-Contributions, bug reports, and suggestions are welcome.
+Contributions and improvements are welcome.
 
 1. Fork the repository.
 2. Clone your fork:
 
    ```bash
-   git clone https://github.com/<your-username>/SYNCCODE-INSTANT-CODING-ROOM.git
-   cd SYNCCODE-INSTANT-CODING-ROOM
+   git clone https://github.com/<your-username>/SCAN-AI.git
+   cd SCAN-AI
    ```
 
 3. Create a feature branch:
@@ -266,36 +193,36 @@ Contributions, bug reports, and suggestions are welcome.
    git checkout -b feature/your-feature-name
    ```
 
-4. Make your changes in the appropriate client or server directory.
-5. Test the changes and verify that the Docker environment starts correctly.
-6. Commit your work:
+4. Make your changes in `index.html`, `style.css`, or `video.js`.
+5. Test the application in a browser with camera access enabled.
+6. Commit your changes:
 
    ```bash
    git add .
-   git commit -m "Improve coding room functionality"
+   git commit -m "Improve object detection interface"
    ```
 
-7. Push your branch:
+7. Push the branch:
 
    ```bash
    git push origin feature/your-feature-name
    ```
 
-8. Open a pull request describing your changes and the tests performed.
+8. Open a pull request describing your changes and testing performed.
 
 ## 📄 License
 
-No repository-wide license has been confirmed. Until a `LICENSE` file is added, do not assume that the project may be freely redistributed or reused.
+No repository-wide license has been confirmed. Until a `LICENSE` file is added, do not assume that the project's source code may be freely redistributed or reused.
 
 ## 👨‍💻 Author
 
 **Pratik Abhang**
 
 - GitHub: [@pratikabhang](https://github.com/pratikabhang)
-- Repository: [SYNCCODE-INSTANT-CODING-ROOM](https://github.com/pratikabhang/SYNCCODE-INSTANT-CODING-ROOM)
+- Repository: [SCAN-AI](https://github.com/pratikabhang/SCAN-AI)
 
 ---
 
 ⭐ If you find this project useful, consider starring the repository.
 
-*Build together. Code together. Learn together.*
+*Explore computer vision. Experiment with machine learning. Build with AI.*
